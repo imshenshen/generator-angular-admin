@@ -1,0 +1,23 @@
+{
+  "name": "generator-angular-admin",
+  "version": "0.0.1",
+  "description": "使用angular构建admin后台操作系统",
+  "main": " ",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "yeoman-generator",
+    "angular",
+    "admin"
+  ],
+  "files": [
+    "app",
+    "router"
+  ],
+  "author": "im.shenshen@qq.com",
+  "license": "ISC",
+  "dependencies": {
+    "yeoman-generator": "^0.23.3"
+  }
+}

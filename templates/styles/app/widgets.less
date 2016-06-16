@@ -1,0 +1,81 @@
+@primaryColor:#556B8D; // dark blue (main app color)
+@16px:1.000em;
+.roundBorders(@radius){
+  -webkit-border-radius:@radius;
+  -moz-border-radius:@radius;
+  -ms-border-radius:@radius;
+  -o-border-radius:@radius;
+  border-radius:@radius;
+}
+//chat
+.chat-widget {
+    .wrapper {
+        margin: 10px 0;
+        clear: both;
+        .avatar {
+            width: 50px;
+            height: 50px;
+        }
+        .avatar i {
+            border: solid 2px #fff;
+        }
+        .post {
+            padding: 7px 10px;
+            .roundBorders(3px);
+            position: relative;
+        }
+        .post.default {
+            background-color: #E6E6E6;
+        }
+        .post.primary {
+            background-color: @primaryColor;
+            color: #fff;
+        }
+        .post.default .arrow {
+            border-right-color: rgba(0, 0, 0, 0.1);
+        }
+        .post.primary .arrow {
+            border-left-color: rgba(red(@primaryColor), green(@primaryColor), blue(@primaryColor), 1);
+        }
+    }
+}
+//Weather
+.widget-weather {
+    .title {
+        margin-bottom: 10px
+    }
+    .temp{
+        font-size: @16px;
+        font-weight: bold;
+        margin-top:10px
+    }
+}
+body.fullscreen-widget-active{
+    overflow: hidden;
+    position: fixed;
+}
+body.fullscreen-widget-active .animated{
+  -webkit-animation-fill-mode: none;
+  animation-fill-mode: none;
+  animation-name:none;
+}
+
+body.fullscreen-widget-active .panel .panel-heading .actions > .fa-chevron-down,
+body.fullscreen-widget-active .panel .panel-heading .actions > .fa-times{
+  display: none;
+}
+
+.panel.widget-fullscreen{
+      display: block;
+      z-index: 9999;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      padding:55px 0 0 0;
+      margin:0px;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      overflow-y: auto;
+ }

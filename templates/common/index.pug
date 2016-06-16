@@ -1,0 +1,85 @@
+doctype html
+
+html(data-ng-app="<%= appname %>")
+   head
+      link(rel='stylesheet', href='./styles/index.css')
+   body.layout-fixed(ng-class="{'aside-collapsed': app.layout.isCollapsed}",ng-controller="<%= appname %>Ctrl")
+      //div(data-preloader)
+      .wrapper()
+         header.topnavbar-wrapper
+            // START Top Navbar
+            nav.navbar.topnavbar(role='navigation',ng-controller="HeaderCtrl as hCon")
+               //navbar header{{
+               .navbar-header
+                  a.navbar-brand(href='#/')
+                     .brand-logo
+                        img.img-responsive(src="./pic/topLogo.png", alt="Logo")
+                     .brand-logo-collapsed
+                        img.img-responsive(src="./pic/topLogoSmall.png", alt="Logo")
+               //navbar header}}
+
+               //Nav wrapper
+               .nav-wrapper
+                  // START Left navbar
+                  ul.nav.navbar-nav
+                     li
+                        // Button used to collapse the left sidebar. Only visible on tablet and desktops
+                        a( trigger-resize="", ng-click="app.layout.isCollapsed = !app.layout.isCollapsed;hCon.onClickIsCollapsed(app.layout.isCollapsed)").hidden-xs
+                           em.fa.fa-navicon.fa-navmenu
+                        // Button to show/hide the sidebar on mobile. Visible on mobile only.
+                        a( ng-click="app.asideToggled = !app.asideToggled").visible-xs.sidebar-toggle
+                           em.fa.fa-navicon
+                  ul.nav.navbar-nav
+                     li
+                        .navbar-nav-name
+                           img(ng-src="{{hCon.userInfo.headThumbFileUrl || './pic/touxiang.jpg'}}")
+                           | {{hCon.userInfo.userName}}
+                  ul.nav.navbar-nav
+                     li.dropdown.dropdown-list()
+                        a
+                           //em.fa.fa-bell
+                           //.label.label-danger(ng-if="hCon.messageNum") {{hCon.messageNum || 0}}
+                           //.label.label-danger {{hCon.messageNum || 5}}
+                  // END Left navbar
+                  // START Right Navbar
+                  ul.nav.navbar-nav.navbar-right
+                     // Fullscreen (only desktops)
+                     li(fullscreen-mode)
+                     li
+                        a(ui-sref="logout", title="退出")
+                           em.fa.fa-sign-out
+                           | 退出
+                     // END Offsidebar menu
+                  // END Right Navbar
+               // END Nav wrapper
+               // START Search form
+               form.navbar-form(role='search', action="search.html")
+                  .form-group.has-feedback
+                     input.form-control(type='text', placeholder="")
+                     .fa.fa-times.form-control-feedback(search-dismiss)
+                  button.hidden.btn.btn-default(type='submit') Submit
+               // END Search form
+            // END Top Navbar
+         aside#aside.aside
+            script(type="text/ng-template",id="sidebar-renderer.html")
+               span(ng-if="item.heading") {{::item.text}}
+               a(ng-if="!item.heading",ui-sref="{{::item.sref}}")
+                  em(class="{{::item.icon}}",ng-hide="inSubmenu")
+                  .label.label-success.pull-right(ng-if="item.alert") {{item.alert}}
+                  span {{::item.text}}
+               ul.nav.sidebar-subnav(ng-if="item.submenu",collapse="sideCtr.isCollapse(pIndex)",ng-init="sideCtr.addCollapse(pIndex,item)")
+                  li.sidebar-subnav-header {{::item.text}}
+                  li(ng-repeat="item in item.submenu",ng-include="'sidebar-renderer.html'",ng-class="sideCtr.getMenuItemPropClasses(item)",
+                  ng-init="pIndex=(pIndex+'-'+$index);inSubmenu=true",
+                  ng-click="sideCtr.toggleCollapse(pIndex)")
+            .aside-inner(ng-controller="SidebarController as sideCtr")
+               nav.sidebar
+                  ul.nav
+                     li(ng-repeat="item in sideCtr.menuItems",ng-class="sideCtr.getMenuItemPropClasses(item)",
+                     ng-include="'sidebar-renderer.html'",ng-init="pIndex = $index",
+                     ng-click="sideCtr.toggleCollapse(pIndex,true)")
+
+         section#section
+            .content-wrapper(ui-view="",autoscroll="false")
+
+      script(src="./index.js")
