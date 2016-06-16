@@ -14,7 +14,7 @@ gulp.task("default", ["webpack-dev-server"]);
 
 //本地编译
 //Production task
-gulp.task("build", ["webpack:build", "jade:build", "less:build-dev", "fonts:move", "pic:move"]);
+gulp.task("build", ["webpack:build", "jade:build", "less:build", "fonts:move", "pic:move"]);
 //Dev task
 gulp.task("build-dev", ["webpack:build-dev", "jade:build-dev", "less:build", "fonts:move", "pic:move"], function () {
     gulp.watch(["src/**/*"], ["webpack:build-dev"]);
@@ -22,7 +22,7 @@ gulp.task("build-dev", ["webpack:build-dev", "jade:build-dev", "less:build", "fo
         .on("change", function (event) {
             //devJadeSrc = event.path;
         });
-    gulp.watch("src/**/*.(less|css)", ["less:build-dev"]);
+    gulp.watch("src/**/*.(less|css)", ["less:build"]);
 
 });
 gulp.task("fonts:move", function (callback) {

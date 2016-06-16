@@ -18,6 +18,7 @@
   "author": "im.shenshen@qq.com",
   "license": "ISC",
   "dependencies": {
+    "lodash": "^4.13.1",
     "yeoman-generator": "^0.23.3"
   }
 }
