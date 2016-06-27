@@ -1,7 +1,7 @@
 var gulp = require("gulp");
 var gutil = require("gulp-util");
 var fs = require("fs");
-var jade = require("gulp-jade")
+var pug = require("gulp-pug")
     , less = require("gulp-less")
     , minCss = require("gulp-minify-css");
 
@@ -14,11 +14,11 @@ gulp.task("default", ["webpack-dev-server"]);
 
 //本地编译
 //Production task
-gulp.task("build", ["webpack:build", "jade:build", "less:build", "fonts:move", "pic:move"]);
+gulp.task("build", ["webpack:build", "pug:build", "less:build", "fonts:move", "pic:move"]);
 //Dev task
-gulp.task("build-dev", ["webpack:build-dev", "jade:build-dev", "less:build", "fonts:move", "pic:move"], function () {
+gulp.task("build-dev", ["webpack:build-dev", "pug:build-dev", "less:build", "fonts:move", "pic:move"], function () {
     gulp.watch(["src/**/*"], ["webpack:build-dev"]);
-    gulp.watch("src/**/*.jade", ["jade:build-dev"])
+    gulp.watch("src/**/*.{pug,jade}", ["pug:build-dev"])
         .on("change", function (event) {
             //devJadeSrc = event.path;
         });
@@ -102,17 +102,17 @@ gulp.task("webpack-dev-server", function (callback) {
      */
 });
 var devJadeSrc = "./src/**/*.pug";
-gulp.task("jade:build-dev", function (callback) {
+gulp.task("pug:build-dev", function (callback) {
     gulp.src(devJadeSrc, {base: "./src/"})
-        .pipe(jade({
+        .pipe(pug({
             pretty: true
         }))
         .pipe(gulp.dest("./build"));
     callback();
 });
-gulp.task("jade:build", function (callback) {
+gulp.task("pug:build", function (callback) {
     gulp.src(devJadeSrc, {base: "./src/"})
-        .pipe(jade())
+        .pipe(pug())
         .pipe(gulp.dest("./build"));
     callback();
 });
