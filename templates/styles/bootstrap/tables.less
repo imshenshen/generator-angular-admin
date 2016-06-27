@@ -2,27 +2,21 @@
 // Tables
 // --------------------------------------------------
 
+
 table {
   background-color: @table-bg;
 }
-
 caption {
   padding-top: @table-cell-padding;
   padding-bottom: @table-cell-padding;
   color: @text-muted;
   text-align: left;
 }
-
 th {
   text-align: left;
 }
 
-th.th-center {
-  text-align: center;
-}
-td.td-center {
-  text-align: center;
-}
+
 // Baseline styles
 
 .table {
@@ -36,15 +30,10 @@ td.td-center {
     > tr {
       > th,
       > td {
-        padding: @table-cell-padding*1.5 @table-cell-padding;
+        padding: @table-cell-padding;
         line-height: @line-height-base;
-        border-bottom: 1px solid @table-border-color;
-      }
-      > td.tddisabled{
-        color: #909FA7;
-      }
-      >td.checkoff{
-        color:#ff0000
+        vertical-align: top;
+        border-top: 1px solid @table-border-color;
       }
     }
   }
@@ -75,6 +64,7 @@ td.td-center {
   }
 }
 
+
 // Condensed table w/ half padding
 
 .table-condensed {
@@ -89,6 +79,7 @@ td.td-center {
     }
   }
 }
+
 
 // Bordered version
 //
@@ -114,19 +105,17 @@ td.td-center {
   }
 }
 
+
 // Zebra-striping
 //
 // Default zebra-stripe styles (alternating gray and transparent backgrounds)
 
 .table-striped {
-  > thead > tr {
-    background-color: @table-head;
-    color: white;
-  }
-  > tbody > tr {
+  > tbody > tr:nth-of-type(odd) {
     background-color: @table-bg-accent;
   }
 }
+
 
 // Hover effect
 //
@@ -138,6 +127,7 @@ td.td-center {
   }
 }
 
+
 // Table cell sizing
 //
 // Reset default table behavior
@@ -147,7 +137,6 @@ table col[class*="col-"] {
   float: none;
   display: table-column;
 }
-
 table {
   td,
   th {
@@ -158,6 +147,7 @@ table {
     }
   }
 }
+
 
 // Table backgrounds
 //
@@ -170,6 +160,7 @@ table {
 .table-row-variant(info; @state-info-bg);
 .table-row-variant(warning; @state-warning-bg);
 .table-row-variant(danger; @state-danger-bg);
+
 
 // Responsive tables
 //
